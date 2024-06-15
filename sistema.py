@@ -87,5 +87,7 @@ while True:
             pass
 
         # Caso opção Sair escolhida
-        case 'q':
+        case 'q' | _:
             break # Encerra o loop
+
+        
