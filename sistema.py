@@ -14,10 +14,12 @@ menu = """
 
 # Variáveis
 saldo = 0
-limite = 500
+LIMITE = 500.00
 extrato = ""
 numero_saques = 0
 LIMITE_SAQUES = 3
+depositos = []
+saques = []
 
 
 # Laço infinito para o menu
@@ -31,11 +33,12 @@ while True:
         # Caso opção Despositar escolhida
         case 'd':
             while deposito <= 0:
-                deposito += float(input('Informe o valor a ser depositado. /n =>'))
+                deposito = float(input('Informe o valor a ser depositado. /n =>'))
 
                 # Laço para verificar se o valor informado é positivo
                 if deposito > 0:
                     saldo += deposito
+                    depositos.append(deposito)
                 else:
                     print(f'''
                             #### O valor R$ {deposito} não é um valor válido para deposito! #### 
@@ -46,7 +49,26 @@ while True:
 
         # Caso opção Sacar escolhida
         case 's':
-            pass
+            # Verifica se não exedeu o limite de saques diários
+            if numero_saques == 3:
+                print('O limite diário de saques é de no máximo 3!')
+
+            else:
+                saque = float(input('Informe o valor a ser sacado. /n =>'))
+
+                # Verifica se não exedeu o valor limite do saques
+                if saque >= LIMITE:
+                    print(f'O limite por saque é de no máximo R$ {LIMITE}!')
+
+                else:
+                    # Verifica se o cliente possui salddo suficiente
+                    if saldo - saque <= 0:
+                        print(f'Você não possui saldo suficiente para realizar esse saque!')                        
+                    else:
+                        saldo -= saque
+                        saques.append(saque)
+                        numero_saques += 1                                           
+               
         
         # Caso opção Extrato escolhida
         case 'e':
