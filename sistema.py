@@ -2,7 +2,7 @@ menu = """
 
 ########## Menu do Sistema Bancário ##########
 
---- Escolha uma opção ---
+           --- Escolha uma opção ---
 
 [d] Depositar
 [s] Sacar
@@ -33,7 +33,7 @@ while True:
         # Caso opção Despositar escolhida
         case 'd':
             while deposito <= 0:
-                deposito = float(input('Informe o valor a ser depositado. /n =>'))
+                deposito = float(input('\nInforme o valor a ser depositado. \n=> '))
 
                 # Laço para verificar se o valor informado é positivo
                 if deposito > 0:
@@ -54,20 +54,32 @@ while True:
                 print('O limite diário de saques é de no máximo 3!')
 
             else:
-                saque = float(input('Informe o valor a ser sacado. /n =>'))
+                status_saque = 1
 
-                # Verifica se não exedeu o valor limite do saques
-                if saque >= LIMITE:
-                    print(f'O limite por saque é de no máximo R$ {LIMITE}!')
+                while status_saque != 0:
+                    saque = float(input('\nInforme o valor a ser sacado. \n => '))
 
-                else:
-                    # Verifica se o cliente possui salddo suficiente
-                    if saldo - saque <= 0:
-                        print(f'Você não possui saldo suficiente para realizar esse saque!')                        
+                    # Verifica se não exedeu o valor limite do saques
+                    if saque > LIMITE:
+                        print(f'''   
+                        $$$ Valores para saque: $$$
+                    
+                    Mínimo - R$ 1.00
+                    Máximo - R$ {str(LIMITE)}
+                    ''')
+
                     else:
-                        saldo -= saque
-                        saques.append(saque)
-                        numero_saques += 1                                           
+                        # Verifica se o cliente possui salddo suficiente
+                        if (saldo - saque) <= 0:
+                            print(f'''
+                                    Você não possui saldo suficiente para realizar esse saque!
+                                    Saldo: R$ {str(saldo)}
+                                ''')                        
+                        else:
+                            saldo -= saque
+                            saques.append(saque)
+                            numero_saques += 1 
+                            status_saque = 0                                          
                
         
         # Caso opção Extrato escolhida
