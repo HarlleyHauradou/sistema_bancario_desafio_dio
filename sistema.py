@@ -13,7 +13,7 @@ menu = """
 
 
 # Variáveis
-saldo = 0
+saldo = 0.00
 LIMITE = 500.00
 extrato = ""
 numero_saques = 0
@@ -84,7 +84,24 @@ while True:
         
         # Caso opção Extrato escolhida
         case 'e':
-            pass
+            print('============== EXTRATO DA CONTA ==============\n')
+            
+            print('\n============== Saques ==============\n')
+            if saques == []:
+                print('Não foram realizadas movimentações.')
+            else:
+                for s in range(len(saques)):
+                    print (f'Saque n° {s+1} - R$ {saques[s]}')
+
+            print('\n============== Depositos ==============\n')
+            if depositos == []:
+                print('Não foram realizadas movimentações.')
+            else:
+                for d in range(len(depositos)):
+                    print (f'Deposito nº {d+1} - R$ {depositos[d]}')
+
+            print(f'\n\n\n\nSALDO - R$ {saldo}')
+            
 
         # Caso opção Sair escolhida
         case 'q' | _:
